@@ -20,6 +20,10 @@ async def speed_test():
         ("100 Main St", "Austin", "TX")
     ]
     
+    # Get timeout from settings
+    from config.settings import settings
+    timeout = settings.RESEARCH_TIMEOUT
+    
     print("\n" + "="*60)
     print("🚀 SPEED TEST - Optimized Multi-Agent System")
     print("="*60)
@@ -27,8 +31,8 @@ async def speed_test():
     print("  ✅ Timeout: 90s → 45s")
     print("  ✅ Max tokens: 4000 → 2500")
     print("  ✅ Concise prompts (50-70% shorter)")
-    print("  ✅ Hard timeout: 25 seconds max")
-    print("\nExpected: 18-25 seconds per property")
+    print(f"  ✅ Hard timeout: {timeout} seconds max")
+    print(f"\nExpected: 18-{timeout} seconds per property")
     print("="*60)
     
     times = []
@@ -51,7 +55,7 @@ async def speed_test():
         print(f"\n📊 Results:")
         print(f"   ⏱️  Time: {elapsed:.2f}s")
         print(f"   ✅ Success: {successful}/5 agents")
-        print(f"   🎯 Under 25s: {'YES ✅' if elapsed < 25 else 'NO ❌'}")
+        print(f"   🎯 Under {timeout}s: {'YES ✅' if elapsed < timeout else 'NO ❌'}")
         print(f"   ⏰ Timeout enforced: {'Yes' if timeout_hit else 'No'}")
         
         # Brief pause between tests
@@ -65,7 +69,7 @@ async def speed_test():
     print(f"   Average: {sum(times)/len(times):.2f}s")
     print(f"   Fastest: {min(times):.2f}s")
     print(f"   Slowest: {max(times):.2f}s")
-    print(f"   All under 25s: {'YES ✅' if all(t < 25 for t in times) else 'NO ❌'}")
+    print(f"   All under {timeout}s: {'YES ✅' if all(t < timeout for t in times) else 'NO ❌'}")
     
     # Performance comparison
     baseline = 32.45  # Previous baseline
@@ -79,8 +83,8 @@ async def speed_test():
     print(f"   Time saved: {baseline - avg_time:.2f}s per property")
     
     print("\n" + "="*60)
-    if avg_time < 25:
-        print("✅ SUCCESS! Target achieved: < 25 seconds")
+    if avg_time < timeout:
+        print(f"✅ SUCCESS! Target achieved: < {timeout} seconds")
     else:
         print("⚠️  Target not met, but still improved")
     print("="*60 + "\n")

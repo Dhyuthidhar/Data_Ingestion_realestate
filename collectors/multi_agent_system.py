@@ -25,10 +25,10 @@ class MultiAgentResearchSystem:
         """
         Deploy 5 specialized agents in parallel for comprehensive research
         
-        OPTIMIZED: 25-second hard timeout for faster responses
+        OPTIMIZED: Configurable timeout (RESEARCH_TIMEOUT from .env)
         
         Cost: 5 agents × $0.005 = $0.025 per property
-        Time: ~18-25 seconds (parallel execution with timeout)
+        Time: ~18-40 seconds (parallel execution with timeout)
         
         Args:
             address: Property street address
@@ -41,19 +41,19 @@ class MultiAgentResearchSystem:
         print(f"   🤖 Deploying {self.max_agents} specialized agents...")
         start_time = time.time()
         
-        # Launch all agents in parallel
-        tasks = {
-            'property_basics': self.research_property_basics(address, city, state),
-            'financial_analysis': self.research_financials(address, city, state),
-            'neighborhood': self.research_neighborhood(city, state),
-            'market_trends': self.research_market_trends(city, state),
-            'soft_signals': self.research_soft_signals(city, state)
+        # Launch all agents in parallel - create tasks from coroutines
+        task_dict = {
+            'property_basics': asyncio.create_task(self.research_property_basics(address, city, state)),
+            'financial_analysis': asyncio.create_task(self.research_financials(address, city, state)),
+            'neighborhood': asyncio.create_task(self.research_neighborhood(city, state)),
+            'market_trends': asyncio.create_task(self.research_market_trends(city, state)),
+            'soft_signals': asyncio.create_task(self.research_soft_signals(city, state))
         }
         
-        # Wait for agents with 25-second hard timeout
+        # Wait for agents with configurable timeout
         done, pending = await asyncio.wait(
-            tasks.values(),
-            timeout=25,  # Hard cutoff at 25 seconds
+            task_dict.values(),
+            timeout=settings.RESEARCH_TIMEOUT,  # Configurable timeout from .env
             return_when=asyncio.ALL_COMPLETED
         )
         
@@ -67,10 +67,10 @@ class MultiAgentResearchSystem:
         
         # Collect results
         results = {}
-        agent_names = list(tasks.keys())
+        agent_names = list(task_dict.keys())
         
         successful_agents = 0
-        for i, (name, task) in enumerate(tasks.items()):
+        for i, (name, task) in enumerate(task_dict.items()):
             if task in done:
                 try:
                     data = task.result()
@@ -104,7 +104,7 @@ class MultiAgentResearchSystem:
             'research_time_seconds': round(elapsed, 2),
             'cost_cents': self.max_agents * 0.5,  # $0.005 = 0.5 cents
             'timestamp': time.time(),
-            'timeout_enforced': elapsed >= 24.5  # True if we hit timeout
+            'timeout_enforced': elapsed >= (settings.RESEARCH_TIMEOUT - 0.5)  # True if we hit timeout
         }
         
         print(f"   ⏱️  Research complete in {elapsed:.1f}s")
