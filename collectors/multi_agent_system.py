@@ -25,8 +25,10 @@ class MultiAgentResearchSystem:
         """
         Deploy 5 specialized agents in parallel for comprehensive research
         
+        OPTIMIZED: 25-second hard timeout for faster responses
+        
         Cost: 5 agents × $0.005 = $0.025 per property
-        Time: ~45-90 seconds (parallel execution)
+        Time: ~18-25 seconds (parallel execution with timeout)
         
         Args:
             address: Property street address
@@ -40,43 +42,56 @@ class MultiAgentResearchSystem:
         start_time = time.time()
         
         # Launch all agents in parallel
-        tasks = [
-            self.research_property_basics(address, city, state),
-            self.research_financials(address, city, state),
-            self.research_neighborhood(city, state),
-            self.research_market_trends(city, state),
-            self.research_soft_signals(city, state)
-        ]
+        tasks = {
+            'property_basics': self.research_property_basics(address, city, state),
+            'financial_analysis': self.research_financials(address, city, state),
+            'neighborhood': self.research_neighborhood(city, state),
+            'market_trends': self.research_market_trends(city, state),
+            'soft_signals': self.research_soft_signals(city, state)
+        }
         
-        # Execute all agents concurrently
-        agents_data = await asyncio.gather(*tasks, return_exceptions=True)
+        # Wait for agents with 25-second hard timeout
+        done, pending = await asyncio.wait(
+            tasks.values(),
+            timeout=25,  # Hard cutoff at 25 seconds
+            return_when=asyncio.ALL_COMPLETED
+        )
         
-        # Process results and handle failures gracefully
+        # Cancel any still-running tasks
+        for task in pending:
+            task.cancel()
+            try:
+                await task
+            except asyncio.CancelledError:
+                pass
+        
+        # Collect results
         results = {}
-        agent_names = [
-            'property_basics',
-            'financial_analysis', 
-            'neighborhood',
-            'market_trends',
-            'soft_signals'
-        ]
+        agent_names = list(tasks.keys())
         
         successful_agents = 0
-        for i, data in enumerate(agents_data):
-            agent_name = agent_names[i]
-            
-            if isinstance(data, Exception):
-                print(f"   ⚠️  Agent {i+1} ({agent_name}) failed: {data}")
-                results[agent_name] = {
-                    "error": str(data),
-                    "data": None,
-                    "agent_status": "failed"
-                }
+        for i, (name, task) in enumerate(tasks.items()):
+            if task in done:
+                try:
+                    data = task.result()
+                    results[name] = data
+                    results[name]['agent_status'] = 'success'
+                    successful_agents += 1
+                    print(f"   ✅ Agent {i+1} ({name}) complete")
+                except Exception as e:
+                    print(f"   ⚠️  Agent {i+1} ({name}) failed: {e}")
+                    results[name] = {
+                        "error": str(e),
+                        "data": None,
+                        "agent_status": "failed"
+                    }
             else:
-                results[agent_name] = data
-                results[agent_name]['agent_status'] = 'success'
-                successful_agents += 1
-                print(f"   ✅ Agent {i+1} ({agent_name}) complete")
+                print(f"   ⏱️  Agent {i+1} ({name}) timeout - skipped")
+                results[name] = {
+                    "error": "timeout",
+                    "data": None,
+                    "agent_status": "timeout"
+                }
         
         elapsed = time.time() - start_time
         
@@ -88,7 +103,8 @@ class MultiAgentResearchSystem:
             'research_depth': 'comprehensive_multi_agent',
             'research_time_seconds': round(elapsed, 2),
             'cost_cents': self.max_agents * 0.5,  # $0.005 = 0.5 cents
-            'timestamp': time.time()
+            'timestamp': time.time(),
+            'timeout_enforced': elapsed >= 24.5  # True if we hit timeout
         }
         
         print(f"   ⏱️  Research complete in {elapsed:.1f}s")
@@ -107,31 +123,24 @@ class MultiAgentResearchSystem:
         Researches core property details, features, and specifications
         """
         prompt = f"""
-Research comprehensive property basics for: {address}, {city}, {state}
+Research: {address}, {city}, {state}
 
-Find and return as JSON:
+Return JSON:
 {{
-    "price": current listing or recent sale price (number or null),
-    "bedrooms": number of bedrooms (number or null),
-    "bathrooms": number of bathrooms (number or null),
-    "square_feet": total square footage (number or null),
-    "year_built": year property was built (number or null),
-    "property_type": "single-family|condo|townhouse|multi-family|other",
-    "lot_size_sqft": lot size in square feet (number or null),
-    "parking_spaces": number of parking spaces (number or null),
-    "price_history": [
-        {{"date": "YYYY-MM", "price": number, "event": "sold|listed|price_change"}}
-    ],
-    "property_tax_annual": annual property tax (number or null),
-    "hoa_fees_monthly": monthly HOA fees (number or null),
-    "heating_cooling": "description of HVAC system",
-    "recent_renovations": "description or null",
-    "special_features": ["list of notable features"],
-    "listing_status": "active|pending|sold|off_market",
-    "days_on_market": number or null
+    "price": current listing/sale price,
+    "bedrooms": number,
+    "bathrooms": number,
+    "square_feet": number,
+    "year_built": number,
+    "property_type": type,
+    "lot_size_sqft": number,
+    "parking_spaces": number,
+    "price_history": [last 2 sales with dates],
+    "property_tax_annual": number,
+    "hoa_fees_monthly": number or null
 }}
 
-If any data unavailable, use null. Include only factual data with citations.
+Be concise. Use null if unavailable.
 """
         
         system_prompt = (
@@ -153,29 +162,20 @@ If any data unavailable, use null. Include only factual data with citations.
         Analyzes investment potential, pricing, and financial metrics
         """
         prompt = f"""
-Financial investment analysis for: {address}, {city}, {state}
+Financial analysis: {address}, {city}, {state}
 
-Calculate and return as JSON:
+Return JSON:
 {{
-    "price_per_sqft": price per square foot (number or null),
-    "neighborhood_avg_price_per_sqft": area average (number or null),
-    "price_vs_market": "above_average|at_average|below_average",
-    "estimated_rental_income_monthly": estimated rent (number or null),
-    "estimated_cap_rate": capitalization rate percentage (number or null),
-    "cash_on_cash_return_estimate": return percentage (number or null),
-    "comparable_sales": [
-        {{"address": "string", "price": number, "date": "YYYY-MM", "similarity": "high|medium|low"}}
-    ],
-    "appreciation_5yr_outlook": "bullish|neutral|bearish",
-    "appreciation_history_10yr": 10-year appreciation percentage (number or null),
-    "insurance_estimate_annual": estimated insurance cost (number or null),
-    "maintenance_estimate_annual": estimated maintenance (number or null),
-    "total_cost_ownership_monthly": total monthly cost (number or null),
-    "investment_grade": "A|B|C|D|F",
-    "value_assessment": "undervalued|fairly_valued|overvalued"
+    "price_per_sqft": number,
+    "neighborhood_avg_ppsf": number,
+    "estimated_rent_monthly": number,
+    "cap_rate_estimate": percentage,
+    "comparable_sales": [3 recent similar properties],
+    "appreciation_outlook_5yr": "bullish|neutral|bearish",
+    "investment_grade": "A|B|C|D"
 }}
 
-Use null for unavailable data. Provide reasoning for grades.
+Focus on key metrics only.
 """
         
         system_prompt = (
@@ -196,44 +196,19 @@ Use null for unavailable data. Provide reasoning for grades.
         Researches schools, crime, walkability, amenities, demographics
         """
         prompt = f"""
-Deep neighborhood analysis for: {city}, {state}
+Neighborhood: {city}, {state}
 
-Research and return as JSON:
+Return JSON:
 {{
-    "schools": [
-        {{"name": "string", "rating": number (1-10), "distance_miles": number, "type": "elementary|middle|high"}}
-    ],
-    "crime": {{
-        "rating": "low|medium|high",
-        "violent_crime_per_100k": number or null,
-        "property_crime_per_100k": number or null,
-        "vs_national_avg": "better|worse|similar"
-    }},
-    "walkability": {{
-        "walk_score": number (0-100) or null,
-        "transit_score": number (0-100) or null,
-        "bike_score": number (0-100) or null
-    }},
-    "amenities": {{
-        "grocery_stores_1mile": number or null,
-        "restaurants_variety": "excellent|good|fair|limited",
-        "parks_nearby": ["list of park names"],
-        "shopping_centers": ["list"],
-        "medical_facilities": ["list"]
-    }},
-    "commute": {{
-        "to_downtown_minutes": average time (number or null),
-        "to_airport_minutes": average time (number or null),
-        "public_transit_options": ["bus|train|metro|light_rail"]
-    }},
-    "demographics": {{
-        "median_age": number or null,
-        "median_income": number or null,
-        "diversity_index": "high|medium|low"
-    }},
-    "community_character": "description of neighborhood vibe",
-    "future_development": "planned projects or changes"
+    "schools": [top 3 with ratings/distance],
+    "crime": {{"rating": "low|medium|high", "vs_national": "better|worse"}},
+    "walkability": {{"walk_score": 0-100, "transit_score": 0-100}},
+    "amenities": {{"grocery": count, "restaurants": "excellent|good|fair", "parks": [names]}},
+    "commute_downtown_min": number,
+    "demographics": {{"median_age": number, "median_income": number}}
 }}
+
+Be brief.
 """
         
         system_prompt = (
@@ -254,26 +229,19 @@ Research and return as JSON:
         Analyzes current market conditions, trends, and forecasts
         """
         prompt = f"""
-Real estate market trends for: {city}, {state}
+Market: {city}, {state}
 
-Analyze and return as JSON:
+Return JSON:
 {{
-    "median_home_price_current": current median price (number or null),
-    "median_price_12mo_ago": price 12 months ago (number or null),
-    "price_trend_percent": year-over-year change (number or null),
-    "price_trend_direction": "rising|stable|falling",
-    "days_on_market_avg": average days (number or null),
-    "inventory_months_supply": months of supply (number or null),
+    "median_price_current": number,
+    "price_trend_12mo": percentage,
+    "days_on_market_avg": number,
     "inventory_level": "low|balanced|high",
-    "price_reductions_percent": percentage of listings with cuts (number or null),
-    "market_type": "strong_sellers|sellers|balanced|buyers|strong_buyers",
-    "forecast_12mo": "appreciation|stable|depreciation",
-    "forecast_confidence": "high|medium|low",
-    "seasonal_trends": "description of seasonal patterns",
-    "competition_level": "high|medium|low",
-    "best_time_to_buy": "recommendation",
-    "market_momentum": "accelerating|stable|slowing"
+    "market_type": "sellers|balanced|buyers",
+    "forecast_12mo": "appreciation|stable|depreciation"
 }}
+
+Key metrics only.
 """
         
         system_prompt = (
@@ -294,50 +262,20 @@ Analyze and return as JSON:
         Researches forward-looking indicators, corporate activity, innovation
         """
         prompt = f"""
-Economic soft signals and forward-looking indicators for: {city}, {state}
+Economic signals: {city}, {state}
 
-Research comprehensively and return as JSON:
+Return JSON:
 {{
-    "corporate_employment": {{
-        "major_employers": ["top 5 companies"],
-        "recent_relocations_12mo": [
-            {{"company": "string", "employees": number, "date": "YYYY-MM"}}
-        ],
-        "hiring_announcements": "summary",
-        "layoff_activity": "low|medium|high",
-        "avg_tech_salary": number or null,
-        "job_growth_rate_yoy": percentage (number or null)
-    }},
-    "innovation_ecosystem": {{
-        "vc_funding_last_year": amount in millions (number or null),
-        "startups_founded_last_year": number or null,
-        "tech_company_presence": "strong|moderate|weak",
-        "university_research_strength": "strong|moderate|weak",
-        "patent_filings_trend": "increasing|stable|decreasing"
-    }},
-    "infrastructure": {{
-        "transportation_projects": ["list of announced projects"],
-        "airport_expansion": "yes|no|planned",
-        "public_transit_improvements": "description",
-        "broadband_5g_rollout": "complete|in_progress|limited"
-    }},
-    "economic_indicators": {{
-        "population_growth_5yr": percentage (number or null),
-        "median_income_growth": percentage (number or null),
-        "cost_of_living_trend": "rising_fast|rising|stable",
-        "tax_policy_changes": "description or null"
-    }},
-    "sentiment_narrative": {{
-        "media_tone": "positive|neutral|negative",
-        "national_attention": "hot_market|emerging|stable|declining",
-        "investor_sentiment": "bullish|neutral|bearish",
-        "developer_activity": "very_active|active|moderate|low",
-        "quality_of_life_ranking": number or null
-    }},
-    "risk_factors": ["list of potential concerns"],
-    "opportunities": ["list of positive signals"],
-    "overall_outlook": "very_positive|positive|neutral|concerning"
+    "major_employers": [top 5],
+    "recent_relocations": [companies with employee counts],
+    "job_growth_yoy": percentage,
+    "vc_funding_last_year": amount,
+    "population_growth_5yr": percentage,
+    "sentiment": {{"media_tone": "positive|neutral|negative", "investor_outlook": "bullish|neutral|bearish"}},
+    "infrastructure_projects": [key projects]
 }}
+
+Focus on actionable signals.
 """
         
         system_prompt = (

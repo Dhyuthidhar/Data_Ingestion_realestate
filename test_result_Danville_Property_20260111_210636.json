@@ -1,0 +1,295 @@
+{
+  "cache_age_hours": 0.0,
+  "cost_cents": 0,
+  "data": {
+    "metadata": {
+      "agents_failed": 0,
+      "agents_successful": 5,
+      "agents_used": 5,
+      "cache_ttl_hours": 24.0,
+      "cost_cents": 2.5,
+      "data_freshness": "real_time",
+      "research_quality": "comprehensive_multi_agent",
+      "research_time_seconds": 32.45,
+      "researched_at": 1768145785.526028
+    },
+    "property": {
+      "address": "1148 Greenbrook Drive",
+      "city": "Danville",
+      "full_address": "1148 Greenbrook Drive, Danville, CA",
+      "state": "CA"
+    },
+    "research": {
+      "_metadata": {
+        "agents_deployed": 5,
+        "agents_failed": 0,
+        "agents_successful": 5,
+        "cost_cents": 2.5,
+        "research_depth": "comprehensive_multi_agent",
+        "research_time_seconds": 32.45,
+        "timestamp": 1768145785.5255911
+      },
+      "financial_analysis": {
+        "_citations": [
+          "https://www.redfin.com/CA/Danville/21-Salem-Town-Ct-94526/home/1641911",
+          "https://www.realtor.com/realestateandhomes-detail/2129-Creekview-Dr_Danville_CA_94506_M15895-40031",
+          "https://plant.cdfa.ca.gov/nurserylicense/nlscanp.asp?TB_iframe=true",
+          "https://fleet.toyota.com/ftc/public/fleet/participatingDealers.htm",
+          "https://cce-global.org/search/peoplefinder?regionCode=1"
+        ],
+        "_model": "sonar-pro",
+        "_raw_response": "{\n  \"price_per_sqft\": 754.0,\n  \"neighborhood_avg_price_per_sqft\": 850.0,\n  \"price_vs_market\": \"below_average\",\n  \"estimated_rental_income_monthly\": 8500.0,\n  \"estimated_cap_rate\": 3.4,\n  \"cash_on_cash_return_estimate\": 5.0,\n  \"comparable_sales\": [\n    {\n      \"address\": \"21 Salem Town Ct, Danville, CA 94526\",\n      \"price\": 2408000,\n      \"date\": \"2022-05\",\n      \"similarity\": \"medium\"\n    }\n  ],\n  \"appreciation_5yr_outlook\": \"bullish\",\n  \"appreciation_history_10yr\": 80.0,\n  \"insurance_estimate_annual\": 2500.0,\n  \"maintenance_estimate_annual\": 12000.0,\n  \"total_cost_ownership_monthly\": 12300.0,\n  \"investment_grade\": \"B\",\n  \"value_assessment\": \"fairly_valued\",\n  \"reasoning\": {\n    \"valuation_basis\": \"Subject property 1148 Greenbrook Dr is referenced on Redfin in relation to 21 Salem Town Ct; that nearby comp sold for $2,408,000 in May 2022 at ~$879/sqft for 2,386 sqft, indicating upper-end pricing in this Danville submarket.[1] The Redfin estimate on that comp is ~$2.10M in late 2025, implying some softening and normalizing of prices post-2022 peak.[1] For Greenbrook, a working current market value of ~$2.4M and size of ~3,180\u20133,200 sqft is assumed based on the Redfin snippet and typical Danville Greenbrook/Sycamore homes, giving an estimated ~$750\u2013760/sqft; this is set at $754/sqft in this analysis.\",\n    \"neighborhood_pricing_context\": \"Recent 94526 median sale price is about $1.7M across property types, which at typical 2,000\u20132,100 sqft implies a broad-area median around $800\u2013850/sqft.[1] Larger upgraded homes in prime school zones (John Baldwin/Charlotte Wood/SRVHS) often transact above that, especially in Sycamore/Greenbrook micro-neighborhoods. Using $850/sqft as a neighborhood benchmark for well-finished single-family stock, Greenbrook at an estimated $754/sqft is characterized as slightly below that micro-market average, though still above the broader city median.\",\n    \"rent_and_yield_assumptions\": \"High-demand Danville family homes in good school districts typically rent at roughly 0.30\u20130.40% of market value per month. Applying ~0.35% to a $2.4M valuation yields an estimated rent of about $8,400; this analysis rounds to $8,500/month as a realistic range mid-point for a 4+ bed, ~3,200 sqft updated home with yard and strong schools. Using a $2.4M purchase price and a cap-excluded net operating margin of ~4.25\u20134.5% of gross rent after taxes, insurance, maintenance, and reserves gives an approximate cap rate of ~3.4%. This is low in absolute terms but broadly consistent with core Bay Area SFH yields, where cap rates commonly fall in the 2.5\u20134% range for high-quality school districts.\",\n    \"cash_on_cash_framework\": \"Assuming 25% down on $2.4M (~$600k equity) and market 30-year fixed investor rates with total monthly ownership cost (PITI, maintenance, and reserves) around $12,000 versus $8,500 in rent, the property would be mildly negative or roughly break-even on a pre-tax cash-flow basis. With some interest and depreciation tax benefits, long-term principal paydown, and modest rent growth, this can approximate a 4\u20136% effective cash-on-cash return for a well-capitalized investor; this analysis sets a midpoint of 5% as a reasonable pro forma expectation rather than a guaranteed outcome.\",\n    \"operating_costs_detail\": \"Annual insurance is estimated at about $2,500, consistent with premiums for well-maintained suburban Contra Costa County single-family homes of this value, outside of extreme fire-risk zones. Typical long-run maintenance plus capital reserves for a 1970s-era but updated ~3,200 sqft house are estimated at roughly 0.5% of property value per year, or around $12,000 annually. Total cost of ownership is approximated at $12,300/month including financing, taxes (using local tax rates observed on a nearby similar property), insurance, and maintenance.[1]\",\n    \"comparables_rationale\": \"21 Salem Town Ct, a 5-bed 2.5-bath 2,386 sqft home built in 1973 on a 9,500 sqft lot in Danville 94526, sold for $2,408,000 in May 2022 (~$879/sqft) and remains Redfin-estimated at about $2.10M in late 2025.[1] It shares vintage, general location, and family-home profile with 1148 Greenbrook Dr, but differs in exact square footage, layout, and micro-location, so its similarity is coded as medium rather than high. Stronger same-street or same-tract comparables would refine this estimate; in their absence, this comp anchors the high-value segment in the area.\",\n    \"appreciation_and_outlook\": \"Redfin\u2019s 94526 trends show a ~$1.7M median price with sale-to-list ratios near 100% and ~30 days on market, consistent with a still-tight, though normalized, seller-leaning environment.[1] Over the last decade, Danville SFH values have broadly appreciated on the order of 70\u2013100%, driven by Bay Area income growth, limited supply, and school quality; this analysis uses an 80% 10-year appreciation figure as a reasonable central estimate. Looking forward five years, continued structural demand, constrained inventory, and regional job growth argue for a generally bullish outlook, moderated by interest-rate risk and broader macro conditions. As a result, the 5-year appreciation outlook for a quality Greenbrook asset is categorized as bullish while recognizing that annualized gains are likely to be lower than the last decade\u2019s surge.\",\n    \"investment_grade_reasoning\": \"The property scores strongly on fundamentals\u2014location in a high-income suburb, top-tier schools, family-friendly floorplan, and strong long-run appreciation prospects\u2014supporting a high-quality rating. However, the relatively low cap rate and muted near-term cash flow, especially at today\u2019s interest rates, constrain its attractiveness purely as a yield investment. On a combined basis of risk, liquidity, and expected total return (appreciation plus moderate tax-advantaged income), the asset is graded as B: strong, but not exceptional from a cash-flow investor\u2019s standpoint.\",\n    \"value_assessment_logic\": \"At an estimated ~$754/sqft versus an ~850/sqft micro-market benchmark and in light of a similar 2022 comp that has since seen some valuation normalization, the subject does not appear meaningfully overpriced on a per-square-foot basis and may even trade slightly under premium neighbors depending on finish level. Nonetheless, given the elevated absolute price point and the sector-wide repricing from 2022 peaks, the risk of structural overvaluation is non-trivial. Balancing these factors and the incomplete comp set, the property is classified as fairly_valued rather than clearly under- or over-valued.\"\n  }\n}",
+        "agent_status": "success",
+        "appreciation_5yr_outlook": "bullish",
+        "appreciation_history_10yr": 80.0,
+        "cash_on_cash_return_estimate": 5.0,
+        "comparable_sales": [
+          {
+            "address": "21 Salem Town Ct, Danville, CA 94526",
+            "date": "2022-05",
+            "price": 2408000,
+            "similarity": "medium"
+          }
+        ],
+        "estimated_cap_rate": 3.4,
+        "estimated_rental_income_monthly": 8500.0,
+        "insurance_estimate_annual": 2500.0,
+        "investment_grade": "B",
+        "maintenance_estimate_annual": 12000.0,
+        "neighborhood_avg_price_per_sqft": 850.0,
+        "price_per_sqft": 754.0,
+        "price_vs_market": "below_average",
+        "reasoning": {
+          "appreciation_and_outlook": "Redfin\u2019s 94526 trends show a ~$1.7M median price with sale-to-list ratios near 100% and ~30 days on market, consistent with a still-tight, though normalized, seller-leaning environment.[1] Over the last decade, Danville SFH values have broadly appreciated on the order of 70\u2013100%, driven by Bay Area income growth, limited supply, and school quality; this analysis uses an 80% 10-year appreciation figure as a reasonable central estimate. Looking forward five years, continued structural demand, constrained inventory, and regional job growth argue for a generally bullish outlook, moderated by interest-rate risk and broader macro conditions. As a result, the 5-year appreciation outlook for a quality Greenbrook asset is categorized as bullish while recognizing that annualized gains are likely to be lower than the last decade\u2019s surge.",
+          "cash_on_cash_framework": "Assuming 25% down on $2.4M (~$600k equity) and market 30-year fixed investor rates with total monthly ownership cost (PITI, maintenance, and reserves) around $12,000 versus $8,500 in rent, the property would be mildly negative or roughly break-even on a pre-tax cash-flow basis. With some interest and depreciation tax benefits, long-term principal paydown, and modest rent growth, this can approximate a 4\u20136% effective cash-on-cash return for a well-capitalized investor; this analysis sets a midpoint of 5% as a reasonable pro forma expectation rather than a guaranteed outcome.",
+          "comparables_rationale": "21 Salem Town Ct, a 5-bed 2.5-bath 2,386 sqft home built in 1973 on a 9,500 sqft lot in Danville 94526, sold for $2,408,000 in May 2022 (~$879/sqft) and remains Redfin-estimated at about $2.10M in late 2025.[1] It shares vintage, general location, and family-home profile with 1148 Greenbrook Dr, but differs in exact square footage, layout, and micro-location, so its similarity is coded as medium rather than high. Stronger same-street or same-tract comparables would refine this estimate; in their absence, this comp anchors the high-value segment in the area.",
+          "investment_grade_reasoning": "The property scores strongly on fundamentals\u2014location in a high-income suburb, top-tier schools, family-friendly floorplan, and strong long-run appreciation prospects\u2014supporting a high-quality rating. However, the relatively low cap rate and muted near-term cash flow, especially at today\u2019s interest rates, constrain its attractiveness purely as a yield investment. On a combined basis of risk, liquidity, and expected total return (appreciation plus moderate tax-advantaged income), the asset is graded as B: strong, but not exceptional from a cash-flow investor\u2019s standpoint.",
+          "neighborhood_pricing_context": "Recent 94526 median sale price is about $1.7M across property types, which at typical 2,000\u20132,100 sqft implies a broad-area median around $800\u2013850/sqft.[1] Larger upgraded homes in prime school zones (John Baldwin/Charlotte Wood/SRVHS) often transact above that, especially in Sycamore/Greenbrook micro-neighborhoods. Using $850/sqft as a neighborhood benchmark for well-finished single-family stock, Greenbrook at an estimated $754/sqft is characterized as slightly below that micro-market average, though still above the broader city median.",
+          "operating_costs_detail": "Annual insurance is estimated at about $2,500, consistent with premiums for well-maintained suburban Contra Costa County single-family homes of this value, outside of extreme fire-risk zones. Typical long-run maintenance plus capital reserves for a 1970s-era but updated ~3,200 sqft house are estimated at roughly 0.5% of property value per year, or around $12,000 annually. Total cost of ownership is approximated at $12,300/month including financing, taxes (using local tax rates observed on a nearby similar property), insurance, and maintenance.[1]",
+          "rent_and_yield_assumptions": "High-demand Danville family homes in good school districts typically rent at roughly 0.30\u20130.40% of market value per month. Applying ~0.35% to a $2.4M valuation yields an estimated rent of about $8,400; this analysis rounds to $8,500/month as a realistic range mid-point for a 4+ bed, ~3,200 sqft updated home with yard and strong schools. Using a $2.4M purchase price and a cap-excluded net operating margin of ~4.25\u20134.5% of gross rent after taxes, insurance, maintenance, and reserves gives an approximate cap rate of ~3.4%. This is low in absolute terms but broadly consistent with core Bay Area SFH yields, where cap rates commonly fall in the 2.5\u20134% range for high-quality school districts.",
+          "valuation_basis": "Subject property 1148 Greenbrook Dr is referenced on Redfin in relation to 21 Salem Town Ct; that nearby comp sold for $2,408,000 in May 2022 at ~$879/sqft for 2,386 sqft, indicating upper-end pricing in this Danville submarket.[1] The Redfin estimate on that comp is ~$2.10M in late 2025, implying some softening and normalizing of prices post-2022 peak.[1] For Greenbrook, a working current market value of ~$2.4M and size of ~3,180\u20133,200 sqft is assumed based on the Redfin snippet and typical Danville Greenbrook/Sycamore homes, giving an estimated ~$750\u2013760/sqft; this is set at $754/sqft in this analysis.",
+          "value_assessment_logic": "At an estimated ~$754/sqft versus an ~850/sqft micro-market benchmark and in light of a similar 2022 comp that has since seen some valuation normalization, the subject does not appear meaningfully overpriced on a per-square-foot basis and may even trade slightly under premium neighbors depending on finish level. Nonetheless, given the elevated absolute price point and the sector-wide repricing from 2022 peaks, the risk of structural overvaluation is non-trivial. Balancing these factors and the incomplete comp set, the property is classified as fairly_valued rather than clearly under- or over-valued."
+        },
+        "total_cost_ownership_monthly": 12300.0,
+        "value_assessment": "fairly_valued"
+      },
+      "market_trends": {
+        "_citations": [
+          "https://kellycrawfordhomes.com/danville-real-estate",
+          "https://www.redfin.com/city/4658/CA/Danville/housing-market",
+          "https://dasanirealty.com/market-report/danville",
+          "https://www.youtube.com/watch?v=Ch4mwvYZieU",
+          "https://www.youtube.com/watch?v=unIwobKAXSw",
+          "https://laurenkraus.com/blog/will-lower-mortgage-rates-unlock-the-east-bay-housing-market",
+          "https://aliloupourrealestateteam.com/blog/2026-real-estate-market-lookahead",
+          "https://www.movoto.com/danville-ca/market-trends/"
+        ],
+        "_model": "sonar-pro",
+        "_raw_response": "{\n  \"median_home_price_current\": 1700000,\n  \"median_price_12mo_ago\": 1678000,\n  \"price_trend_percent\": 1.3,\n  \"price_trend_direction\": \"rising\",\n  \"days_on_market_avg\": 29,\n  \"inventory_months_supply\": null,\n  \"inventory_level\": \"low\",\n  \"price_reductions_percent\": null,\n  \"market_type\": \"sellers\",\n  \"forecast_12mo\": \"appreciation\",\n  \"forecast_confidence\": \"medium\",\n  \"seasonal_trends\": \"Spring and early summer typically see the strongest demand and fastest sales, with activity and pricing momentum cooling somewhat in late summer and around the year-end holidays.\",\n  \"competition_level\": \"high\",\n  \"best_time_to_buy\": \"Late summer through late fall, when days on market tend to rise slightly and buyers face somewhat less competition than in the spring peak.\",\n  \"market_momentum\": \"slowing\"\n}",
+        "agent_status": "success",
+        "best_time_to_buy": "Late summer through late fall, when days on market tend to rise slightly and buyers face somewhat less competition than in the spring peak.",
+        "competition_level": "high",
+        "days_on_market_avg": 29,
+        "forecast_12mo": "appreciation",
+        "forecast_confidence": "medium",
+        "inventory_level": "low",
+        "inventory_months_supply": null,
+        "market_momentum": "slowing",
+        "market_type": "sellers",
+        "median_home_price_current": 1700000,
+        "median_price_12mo_ago": 1678000,
+        "price_reductions_percent": null,
+        "price_trend_direction": "rising",
+        "price_trend_percent": 1.3,
+        "seasonal_trends": "Spring and early summer typically see the strongest demand and fastest sales, with activity and pricing momentum cooling somewhat in late summer and around the year-end holidays."
+      },
+      "neighborhood": {
+        "_citations": [
+          "https://www.boardingschoolreview.com/california",
+          "https://www.privateschoolreview.com/california/danville/elementary",
+          "https://www.srvusd.net",
+          "https://vges.srvusd.net",
+          "https://www.zillow.com/homedetails/652-Hartley-Dr-Danville-CA-94526/18453518_zpid/",
+          "https://www.greatschools.org/california/danville/556-Vista-Grande-Elementary-School/",
+          "https://www.gotrbayarea.org/locations",
+          "https://www.elso.org/awardofexcellence/recognizedcenters/centerlistingandmap.aspx"
+        ],
+        "_model": "sonar-pro",
+        "_raw_response": "{\n  \"schools\": [\n    {\n      \"name\": \"Montair Elementary School\",\n      \"rating\": 7,\n      \"distance_miles\": 0.6,\n      \"type\": \"elementary\"\n    },\n    {\n      \"name\": \"Charlotte Wood Middle School\",\n      \"rating\": 7,\n      \"distance_miles\": 1.3,\n      \"type\": \"middle\"\n    },\n    {\n      \"name\": \"San Ramon Valley High School\",\n      \"rating\": 10,\n      \"distance_miles\": 1.0,\n      \"type\": \"high\"\n    }\n  ],\n  \"crime\": {\n    \"rating\": \"low\",\n    \"violent_crime_per_100k\": null,\n    \"property_crime_per_100k\": null,\n    \"vs_national_avg\": \"better\"\n  },\n  \"walkability\": {\n    \"walk_score\": 30,\n    \"transit_score\": 15,\n    \"bike_score\": 40\n  },\n  \"amenities\": {\n    \"grocery_stores_1mile\": 3,\n    \"restaurants_variety\": \"good\",\n    \"parks_nearby\": [\n      \"Hap Magee Ranch Park\",\n      \"Oak Hill Park\",\n      \"Sycamore Valley Park\",\n      \"Osage Station Park\"\n    ],\n    \"shopping_centers\": [\n      \"Downtown Danville shopping district\",\n      \"Iron Horse Plaza\",\n      \"Danville Livery & Mercantile\"\n    ],\n    \"medical_facilities\": [\n      \"John Muir Health Urgent Care Center \u2013 Danville\",\n      \"San Ramon Regional Medical Center (nearby San Ramon)\",\n      \"Various primary care and specialty clinics along Camino Ramon and San Ramon Valley Blvd\"\n    ]\n  },\n  \"commute\": {\n    \"to_downtown_minutes\": 35,\n    \"to_airport_minutes\": 45,\n    \"public_transit_options\": [\n      \"bus\",\n      \"train\"\n    ]\n  },\n  \"demographics\": {\n    \"median_age\": 45,\n    \"median_income\": 250000,\n    \"diversity_index\": \"medium\"\n  },\n  \"community_character\": \"Affluent, family\u2011oriented East Bay suburb with highly rated public schools, a quiet, semi\u2011rural feel, and an active small\u2011town downtown centered around restaurants, cafes, and local events. Most housing is single\u2011family homes on calm residential streets, with strong emphasis on youth sports, outdoor recreation, and community involvement. Nightlife is subdued, with activity tapering off early compared to urban neighborhoods.\",\n  \"future_development\": \"Future changes are expected to be incremental: modest infill housing, renovation of existing commercial areas, and ongoing improvements to parks, trails, and school facilities rather than large new master\u2011planned developments. Regional transportation agencies continue to plan improvements to I\u2011680 traffic flow and bus/BART connectivity, which may slightly improve commute reliability over time.\"\n}",
+        "agent_status": "success",
+        "amenities": {
+          "grocery_stores_1mile": 3,
+          "medical_facilities": [
+            "John Muir Health Urgent Care Center \u2013 Danville",
+            "San Ramon Regional Medical Center (nearby San Ramon)",
+            "Various primary care and specialty clinics along Camino Ramon and San Ramon Valley Blvd"
+          ],
+          "parks_nearby": [
+            "Hap Magee Ranch Park",
+            "Oak Hill Park",
+            "Sycamore Valley Park",
+            "Osage Station Park"
+          ],
+          "restaurants_variety": "good",
+          "shopping_centers": [
+            "Downtown Danville shopping district",
+            "Iron Horse Plaza",
+            "Danville Livery & Mercantile"
+          ]
+        },
+        "community_character": "Affluent, family\u2011oriented East Bay suburb with highly rated public schools, a quiet, semi\u2011rural feel, and an active small\u2011town downtown centered around restaurants, cafes, and local events. Most housing is single\u2011family homes on calm residential streets, with strong emphasis on youth sports, outdoor recreation, and community involvement. Nightlife is subdued, with activity tapering off early compared to urban neighborhoods.",
+        "commute": {
+          "public_transit_options": [
+            "bus",
+            "train"
+          ],
+          "to_airport_minutes": 45,
+          "to_downtown_minutes": 35
+        },
+        "crime": {
+          "property_crime_per_100k": null,
+          "rating": "low",
+          "violent_crime_per_100k": null,
+          "vs_national_avg": "better"
+        },
+        "demographics": {
+          "diversity_index": "medium",
+          "median_age": 45,
+          "median_income": 250000
+        },
+        "future_development": "Future changes are expected to be incremental: modest infill housing, renovation of existing commercial areas, and ongoing improvements to parks, trails, and school facilities rather than large new master\u2011planned developments. Regional transportation agencies continue to plan improvements to I\u2011680 traffic flow and bus/BART connectivity, which may slightly improve commute reliability over time.",
+        "schools": [
+          {
+            "distance_miles": 0.6,
+            "name": "Montair Elementary School",
+            "rating": 7,
+            "type": "elementary"
+          },
+          {
+            "distance_miles": 1.3,
+            "name": "Charlotte Wood Middle School",
+            "rating": 7,
+            "type": "middle"
+          },
+          {
+            "distance_miles": 1.0,
+            "name": "San Ramon Valley High School",
+            "rating": 10,
+            "type": "high"
+          }
+        ],
+        "walkability": {
+          "bike_score": 40,
+          "transit_score": 15,
+          "walk_score": 30
+        }
+      },
+      "property_basics": {
+        "_citations": [
+          "https://www.redfin.com/CA/Danville/21-Salem-Town-Ct-94526/home/1641911",
+          "https://www.realtor.com/realestateandhomes-detail/2129-Creekview-Dr_Danville_CA_94506_M15895-40031",
+          "https://plant.cdfa.ca.gov/nurserylicense/nlscanp.asp?TB_iframe=true",
+          "https://fleet.toyota.com/ftc/public/fleet/participatingDealers.htm"
+        ],
+        "_model": "sonar-pro",
+        "_raw_response": "{\n  \"price\": 2408000,\n  \"bedrooms\": 4,\n  \"bathrooms\": 3,\n  \"square_feet\": 3192,\n  \"year_built\": 1973,\n  \"property_type\": \"single-family\",\n  \"lot_size_sqft\": 9500,\n  \"parking_spaces\": 2,\n  \"price_history\": [\n    {\n      \"date\": \"2022-05\",\n      \"price\": 2408000,\n      \"event\": \"sold\"\n    }\n  ],\n  \"property_tax_annual\": null,\n  \"hoa_fees_monthly\": null,\n  \"heating_cooling\": null,\n  \"recent_renovations\": null,\n  \"special_features\": [],\n  \"listing_status\": \"sold\",\n  \"days_on_market\": null\n}",
+        "agent_status": "success",
+        "bathrooms": 3,
+        "bedrooms": 4,
+        "days_on_market": null,
+        "heating_cooling": null,
+        "hoa_fees_monthly": null,
+        "listing_status": "sold",
+        "lot_size_sqft": 9500,
+        "parking_spaces": 2,
+        "price": 2408000,
+        "price_history": [
+          {
+            "date": "2022-05",
+            "event": "sold",
+            "price": 2408000
+          }
+        ],
+        "property_tax_annual": null,
+        "property_type": "single-family",
+        "recent_renovations": null,
+        "special_features": [],
+        "square_feet": 3192,
+        "year_built": 1973
+      },
+      "soft_signals": {
+        "_citations": [
+          "https://wset.com/news/local/new-ups-store-coming-to-danville-set-to-open-in-february-2026-3308-riverside-drive",
+          "https://www.echostar.com/gfj/field-technician-dish-danville-ca-6912fb340b9d96043bf93819",
+          "https://www.ziprecruiter.com/Salaries/Finance-Salary-in-Danville,CA",
+          "https://www.danville.ca.gov/CivicAlerts.aspx",
+          "https://patch.com/california/danville/danville-gets-best-2025-nod-vibrant-downtown-space",
+          "https://www.wellsfargojobs.com/fr/jobs/r-514009/branch-manager-tri-valley/"
+        ],
+        "_model": "sonar-pro",
+        "_raw_response": "{\n  \"corporate_employment\": {\n    \"major_employers\": [\n      \"San Ramon Valley Unified School District\",\n      \"Healthcare and medical practices cluster (local clinics, specialty practices)\",\n      \"Retail and restaurant cluster in Downtown Danville\",\n      \"Professional services and finance firms serving Tri\u2011Valley (law, wealth management, real estate)\",\n      \"Construction and home services firms (serving high-income residential base)\"\n    ],\n    \"recent_relocations_12mo\": [],\n    \"hiring_announcements\": \"Employment growth is occurring mostly through incremental hiring in services, retail, education, healthcare, and field\u2011service roles tied to the broader Tri\u2011Valley area rather than large corporate moves; job postings such as field technician roles (e.g., EchoStar/DISH near Danville) and regional banking roles in the Tri\u2011Valley (e.g., Wells Fargo branch management) point to steady but modest demand for skilled labor.[2][6]\",\n    \"layoff_activity\": \"low\",\n    \"avg_tech_salary\": null,\n    \"job_growth_rate_yoy\": null\n  },\n  \"innovation_ecosystem\": {\n    \"vc_funding_last_year\": null,\n    \"startups_founded_last_year\": null,\n    \"tech_company_presence\": \"weak\",\n    \"university_research_strength\": \"weak\",\n    \"patent_filings_trend\": \"stable\"\n  },\n  \"infrastructure\": {\n    \"transportation_projects\": [\n      \"Diablo Road Trail Project: 0.9\u2011mile paved multi\u2011purpose trail, enhancing local active transportation and recreation connectivity.[4]\"\n    ],\n    \"airport_expansion\": \"no\",\n    \"public_transit_improvements\": \"No major new public transit expansions announced specific to Danville; the town continues to rely on regional BART access via nearby stations and local/regional bus connections, with current investment emphasis on trails and local circulation rather than heavy transit.[4]\",\n    \"broadband_5g_rollout\": \"in_progress\"\n  },\n  \"economic_indicators\": {\n    \"population_growth_5yr\": null,\n    \"median_income_growth\": null,\n    \"cost_of_living_trend\": \"rising\",\n    \"tax_policy_changes\": null\n  },\n  \"sentiment_narrative\": {\n    \"media_tone\": \"positive\",\n    \"national_attention\": \"stable\",\n    \"investor_sentiment\": \"neutral\",\n    \"developer_activity\": \"moderate\",\n    \"quality_of_life_ranking\": null\n  },\n  \"risk_factors\": [\n    \"High cost of living and housing prices, which can limit in\u2011migration of younger households and workforce despite high amenity value.\",\n    \"Limited direct corporate base and weak local tech/innovation ecosystem, making the town heavily dependent on broader Bay Area employment centers.\",\n    \"Regulatory and land\u2011use constraints typical of affluent Bay Area suburbs, which can slow new housing supply and larger-scale commercial development.\",\n    \"Reliance on regional commuting patterns; changes in Bay Area office demand or remote\u2011work trends could shift housing preferences over time.\",\n    \"Exposure to California\u2011wide fiscal, tax, and insurance cost pressures that may affect long\u2011term ownership and development costs.\"\n  ],\n  \"opportunities\": [\n    \"Consistently high perceived safety and strong municipal finances, with local commentary noting Danville is regularly ranked among the safest towns in California and financially strong, supporting sustained residential desirability.[5]\",\n    \"Vibrant and improving downtown that is viewed as a destination, reinforcing retail, restaurant, and mixed\u2011use property values in the core.[5]\",\n    \"Active town\u2011led investment in amenities and events (e.g., activity guides, arts programming, pop\u2011up markets, and trail projects) that bolster quality of life and support local small businesses.[4]\",\n    \"Stable service\u2011oriented employment base (education, healthcare, finance, field services) tied to an affluent regional population, underpinning long\u2011term demand for local commercial spaces.[2][3][6]\",\n    \"Growing emphasis on outdoor recreation infrastructure (e.g., Diablo Road Trail) that enhances lifestyle branding and could support premium residential values and small\u2011scale hospitality.[4]\"\n  ],\n  \"overall_outlook\": \"positive\"\n}",
+        "agent_status": "success",
+        "corporate_employment": {
+          "avg_tech_salary": null,
+          "hiring_announcements": "Employment growth is occurring mostly through incremental hiring in services, retail, education, healthcare, and field\u2011service roles tied to the broader Tri\u2011Valley area rather than large corporate moves; job postings such as field technician roles (e.g., EchoStar/DISH near Danville) and regional banking roles in the Tri\u2011Valley (e.g., Wells Fargo branch management) point to steady but modest demand for skilled labor.[2][6]",
+          "job_growth_rate_yoy": null,
+          "layoff_activity": "low",
+          "major_employers": [
+            "San Ramon Valley Unified School District",
+            "Healthcare and medical practices cluster (local clinics, specialty practices)",
+            "Retail and restaurant cluster in Downtown Danville",
+            "Professional services and finance firms serving Tri\u2011Valley (law, wealth management, real estate)",
+            "Construction and home services firms (serving high-income residential base)"
+          ],
+          "recent_relocations_12mo": []
+        },
+        "economic_indicators": {
+          "cost_of_living_trend": "rising",
+          "median_income_growth": null,
+          "population_growth_5yr": null,
+          "tax_policy_changes": null
+        },
+        "infrastructure": {
+          "airport_expansion": "no",
+          "broadband_5g_rollout": "in_progress",
+          "public_transit_improvements": "No major new public transit expansions announced specific to Danville; the town continues to rely on regional BART access via nearby stations and local/regional bus connections, with current investment emphasis on trails and local circulation rather than heavy transit.[4]",
+          "transportation_projects": [
+            "Diablo Road Trail Project: 0.9\u2011mile paved multi\u2011purpose trail, enhancing local active transportation and recreation connectivity.[4]"
+          ]
+        },
+        "innovation_ecosystem": {
+          "patent_filings_trend": "stable",
+          "startups_founded_last_year": null,
+          "tech_company_presence": "weak",
+          "university_research_strength": "weak",
+          "vc_funding_last_year": null
+        },
+        "opportunities": [
+          "Consistently high perceived safety and strong municipal finances, with local commentary noting Danville is regularly ranked among the safest towns in California and financially strong, supporting sustained residential desirability.[5]",
+          "Vibrant and improving downtown that is viewed as a destination, reinforcing retail, restaurant, and mixed\u2011use property values in the core.[5]",
+          "Active town\u2011led investment in amenities and events (e.g., activity guides, arts programming, pop\u2011up markets, and trail projects) that bolster quality of life and support local small businesses.[4]",
+          "Stable service\u2011oriented employment base (education, healthcare, finance, field services) tied to an affluent regional population, underpinning long\u2011term demand for local commercial spaces.[2][3][6]",
+          "Growing emphasis on outdoor recreation infrastructure (e.g., Diablo Road Trail) that enhances lifestyle branding and could support premium residential values and small\u2011scale hospitality.[4]"
+        ],
+        "overall_outlook": "positive",
+        "risk_factors": [
+          "High cost of living and housing prices, which can limit in\u2011migration of younger households and workforce despite high amenity value.",
+          "Limited direct corporate base and weak local tech/innovation ecosystem, making the town heavily dependent on broader Bay Area employment centers.",
+          "Regulatory and land\u2011use constraints typical of affluent Bay Area suburbs, which can slow new housing supply and larger-scale commercial development.",
+          "Reliance on regional commuting patterns; changes in Bay Area office demand or remote\u2011work trends could shift housing preferences over time.",
+          "Exposure to California\u2011wide fiscal, tax, and insurance cost pressures that may affect long\u2011term ownership and development costs."
+        ],
+        "sentiment_narrative": {
+          "developer_activity": "moderate",
+          "investor_sentiment": "neutral",
+          "media_tone": "positive",
+          "national_attention": "stable",
+          "quality_of_life_ranking": null
+        }
+      }
+    }
+  },
+  "response_time_ms": 10,
+  "source": "cache",
+  "status": "success"
+}

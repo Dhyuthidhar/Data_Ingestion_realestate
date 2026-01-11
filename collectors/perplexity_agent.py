@@ -25,7 +25,7 @@ class PerplexityPropertyAgent:
         prompt: str, 
         system_prompt: Optional[str] = None,
         temperature: float = 0.2,
-        max_tokens: int = 4000
+        max_tokens: int = 2500
     ) -> Dict[str, Any]:
         """
         Async research call to Perplexity API
@@ -68,7 +68,7 @@ class PerplexityPropertyAgent:
                         "return_citations": True,
                         "search_recency_filter": "month"  # Recent data only
                     },
-                    timeout=aiohttp.ClientTimeout(total=90)
+                    timeout=aiohttp.ClientTimeout(total=45)
                 ) as response:
                     
                     if response.status != 200:
@@ -107,7 +107,7 @@ class PerplexityPropertyAgent:
                     return result
             
             except asyncio.TimeoutError:
-                raise Exception("Perplexity research timed out (90 seconds)")
+                raise Exception("Perplexity research timed out (45 seconds)")
             except Exception as e:
                 raise Exception(f"Perplexity API error: {str(e)}")
     
