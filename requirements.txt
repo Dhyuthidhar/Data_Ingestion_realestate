@@ -9,7 +9,6 @@ redis==5.0.1
 
 # Async HTTP & Processing
 aiohttp==3.9.1
-asyncio==3.4.3
 requests==2.31.0
 
 # Configuration
