@@ -41,3 +41,25 @@ htmlcov/
 
 # OS
 Thumbs.db
+# Test results and debug files
+agent2_debug.json
+debug_agent2.py
+extraction_accuracy_report.json
+financial_agent_full.json
+fresh_financial.json
+full_response.json
+test_new_agents_results.json
+test_result_1148_greenbrook_FULL.json
+test_results_search_accuracy.md
+verify_api_config.py
+# Backup and optimized versions
+collectors/multi_agent_system_backup.py
+collectors/multi_agent_system_optimized.py
+# Old planning documents
+docs/JSON_ENFORCEMENT_COMPLETION_PLAN.md
+docs/JSON_ENFORCEMENT_IMPLEMENTATION_GUIDE.md
+docs/JSON_ENFORCEMENT_PROGRESS.md
+docs/JSON_ENFORCEMENT_STATUS.md
+# Test scripts (keep in repo but ignore results)
+test_multiple_properties.py
+test_perplexity_direct.py
