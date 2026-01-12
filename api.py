@@ -163,8 +163,149 @@ def get_stats():
         }), 500
 
 # ============================================
-# Property Research Endpoint
+# Property Research Endpoints
 # ============================================
+
+@app.route('/api/research', methods=['POST'])
+def research_property():
+    """
+    POST endpoint for property research (JSON body)
+    
+    Request body:
+        {
+            "address": "123 Main St",
+            "city": "San Francisco",
+            "state": "CA",
+            "force_refresh": false  // optional
+        }
+    
+    Returns:
+        Structured agent results with property data
+    """
+    try:
+        data = request.get_json()
+        
+        if not data:
+            return jsonify({
+                "error": "Invalid request",
+                "message": "Request body must be JSON"
+            }), 400
+        
+        address = data.get('address')
+        city = data.get('city')
+        state = data.get('state')
+        force_refresh = data.get('force_refresh', False)
+        
+        # Validate required parameters
+        if not all([address, city, state]):
+            return jsonify({
+                "error": "Missing required parameters",
+                "required": ["address", "city", "state"],
+                "example": {
+                    "address": "1148 Greenbrook Drive",
+                    "city": "Danville",
+                    "state": "CA"
+                }
+            }), 400
+        
+        # Validate state code
+        if len(state) != 2:
+            return jsonify({
+                "error": "Invalid state code",
+                "message": "State must be a 2-letter code (e.g., 'NY', 'CA')"
+            }), 400
+        
+        property_key = f"{address}, {city}, {state}"
+        cache_key = f"property:{address.replace(' ', '_')}_{city.replace(' ', '_')}_{state}"
+        
+        print(f"\n{'='*60}")
+        print(f"📍 Property Request: {property_key}")
+        print(f"{'='*60}")
+        
+        # Check cache (unless force_refresh)
+        if not force_refresh:
+            cached = cache.get(cache_key)
+            if cached:
+                print(f"✅ Cache HIT: {property_key}")
+                print(f"{'='*60}\n")
+                
+                return jsonify({
+                    "status": "success",
+                    "property": {
+                        "address": address,
+                        "city": city,
+                        "state": state
+                    },
+                    "agents": cached.get('research', {}),
+                    "metadata": cached.get('metadata', {}),
+                    "source": "cache"
+                }), 200
+        
+        print(f"🔬 Starting fresh research...")
+        
+        # Research with multi-agent system
+        start_time = time.time()
+        
+        loop = asyncio.new_event_loop()
+        asyncio.set_event_loop(loop)
+        
+        research_data = loop.run_until_complete(
+            research_system.research_comprehensive(address, city, state)
+        )
+        
+        loop.close()
+        
+        elapsed = time.time() - start_time
+        
+        # Build response
+        complete_data = {
+            "property": {
+                "address": address,
+                "city": city,
+                "state": state,
+                "full_address": property_key
+            },
+            "research": research_data,
+            "metadata": {
+                "researched_at": time.time(),
+                "research_time_seconds": round(elapsed, 2),
+                "agents_used": settings.MAX_AGENTS,
+                "cost_cents": 2.5
+            }
+        }
+        
+        # Cache results
+        cache.set(cache_key, complete_data, ttl=settings.CACHE_TTL)
+        
+        # Save to database
+        try:
+            db.save_property(complete_data)
+        except Exception as e:
+            print(f"⚠️  Database save failed: {e}")
+        
+        print(f"✅ Research complete in {elapsed:.1f}s")
+        print(f"{'='*60}\n")
+        
+        return jsonify({
+            "status": "success",
+            "property": {
+                "address": address,
+                "city": city,
+                "state": state
+            },
+            "agents": research_data,
+            "metadata": complete_data['metadata'],
+            "source": "fresh_research"
+        }), 200
+        
+    except Exception as e:
+        print(f"❌ Research failed: {e}")
+        traceback.print_exc()
+        
+        return jsonify({
+            "error": "Research failed",
+            "message": str(e)
+        }), 500
 
 @app.route('/api/property', methods=['GET'])
 def get_property():
@@ -414,7 +555,9 @@ if __name__ == '__main__':
     print("   GET  /health                - Health check")
     print("   GET  /api/status            - System status")
     print("   GET  /api/stats             - Statistics")
-    print("   GET  /api/property          - Property research (coming next)")
+    print("   POST /api/research          - Property research (JSON body)")
+    print("   GET  /api/property          - Property research (query params)")
+    print("   GET  /api/property/search   - Search properties")
     print("="*60)
     print(f"🌐 Running on: http://{settings.FLASK_HOST}:{settings.FLASK_PORT}")
     print("="*60 + "\n")

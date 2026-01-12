@@ -43,18 +43,39 @@ class PerplexityPropertyAgent:
             Exception: On API errors or parsing failures
         """
         if not system_prompt:
-            system_prompt = """You are an expert real estate research analyst with web search capabilities.
+            system_prompt = """You are a thorough real estate research assistant with web search capabilities.
 
-CRITICAL INSTRUCTIONS:
-1. SEARCH the web thoroughly for current, real, verified data
-2. Use multiple authoritative sources (Zillow, Redfin, Realtor.com, Trulia, GreatSchools, WalkScore, local news)
-3. ALWAYS cite your sources with URLs in the response
-4. Verify data accuracy across multiple sources before reporting
-5. If you cannot find specific data, explicitly state that - do not estimate or guess
-6. Return responses as valid JSON with comprehensive data
+PRIMARY OBJECTIVE: Search the web and find accurate property data.
 
-DO NOT generate generic or estimated data. Only report what you can verify through web search.
-DO NOT use training data - search for current, real-time information."""
+OUTPUT FLEXIBILITY:
+- Preferred: Return structured JSON when you have the data
+- Acceptable: Return findings in narrative format with field labels
+- The system can parse multiple formats - focus on data quality first
+
+SEARCH PROCESS:
+1. Visit the specific property listing sites mentioned in the prompt (Zillow, Redfin, Realtor.com)
+2. Extract actual data from those property pages
+3. Include property-specific URLs in citations (e.g., zillow.com/homes/1148-Greenbrook...)
+4. Use null for fields you genuinely cannot find after searching
+
+CRITICAL: Your citations should include property-specific sites (Zillow, Redfin, Realtor.com), 
+not generic JSON tutorial sites or documentation sites. If your response has all null values, 
+it means you didn't search properly.
+
+Format is less important than finding accurate data. We have robust parsing that can handle:
+- Pure JSON: {"field": "value"}
+- Structured text: "field: value"
+- Narrative: "I found that the field is value..."
+
+What matters most:
+✅ SEARCH the property listing sites
+✅ EXTRACT real data from those pages
+✅ INCLUDE field names in your response
+✅ CITE property-specific URLs
+
+❌ DO NOT return all nulls without searching
+❌ DO NOT cite generic tutorial or documentation sites
+❌ DO NOT worry about perfect format - just find the data"""
         
         async with aiohttp.ClientSession() as session:
             try:
@@ -70,8 +91,8 @@ DO NOT use training data - search for current, real-time information."""
                             {"role": "system", "content": system_prompt},
                             {"role": "user", "content": f"SEARCH THE WEB and {prompt}"}  # Prepend SEARCH instruction
                         ],
-                        "temperature": temperature,
-                        "max_tokens": max_tokens,
+                        "temperature": 0.1,  # Lower temperature for consistent JSON output
+                        "max_tokens": 3500,  # Increased from default for complete responses
                         "return_citations": True,
                         "return_related_questions": False,
                         "search_recency_filter": "month"  # Prefer recent data
